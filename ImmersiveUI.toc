@@ -1,0 +1,8 @@
+## Interface: 100206
+## Version: 1.0.0
+## Title: Immersive UI
+## Notes: Аддон с кастомизацией UI для более удобной игры с использованием контроллера.
+## Author: Ден Галашевский
+## SavedVariables: ImmersiveUIDB
+
+ImmersiveUI.lua
