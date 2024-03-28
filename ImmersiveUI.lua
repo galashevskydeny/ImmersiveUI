@@ -12,6 +12,11 @@ function addon:OnInitialize()
 end
 
 function addon:OnEnable()
+
+    local key = "PADRSHOULDER" -- замените на интересующую вас клавишу
+    local action = GetBindingAction(key)
+    print("Действие, назначенное на клавишу " .. key .. ": " .. action)
+
     ChatFrame1:SetHeight(1)
     ChatFrame1:Hide()
     
@@ -119,3 +124,56 @@ end
 
 -- Глобальная ссылка на аддон
 _G["ImmersiveUI"] = addon
+
+function addon:SetKeyBindingsDiscovery()
+    SetBinding("PAD1", "JUMP")
+    SetBinding("PAD2", nil)
+    SetBinding("PAD3", nil)
+    SetBinding("PAD4", nil)
+
+    SetBinding("PADRTRIGGER", "INTERACTTARGET")
+    SetBinding("PADRSHOULDER", "SHAPESHIFTBUTTON1")
+    SetBinding("PADRSTICK", nil)
+
+    SetBinding("PADDUP", nil)
+    SetBinding("PADDDOWN", nil)
+    SetBinding("PADDLEFT", nil)
+    SetBinding("PADDRIGHT", nil)
+
+    SetBinding("PADLSHOULDER", "CLICK ConsolePortUtilityToggle:LeftButton")
+    SetBinding("PADLTRIGGER", "CLICK ConsolePortUtilityToggle:Ping")
+    SetBinding("PADLSTICK", nil)
+
+    local macroId = GetMacroIndexByName("Toggle Chat")
+    SetBindingMacro("PADBACK", macroId)
+    SetBindingMacro("PAD6", macroId)
+    
+end
+
+function addon:SetKeyBindingsActionBar()
+    SetBinding("PAD1", "JUMP")
+    SetBinding("PAD2", "ACTIONBUTTON3")
+    SetBinding("PAD3", "ACTIONBUTTON1")
+    SetBinding("PAD4", "ACTIONBUTTON2")
+
+    SetBinding("PADRTRIGGER", "ACTIONBUTTON5")
+    SetBinding("PADRSHOULDER", "ACTIONBUTTON4")
+    SetBinding("PADRSTICK", "ACTIONBUTTON6")
+
+    SetBinding("PADDUP", "ACTIONBUTTON8")
+    SetBinding("PADDDOWN", "ACTIONBUTTON10")
+    SetBinding("PADDLEFT", "ACTIONBUTTON11")
+    SetBinding("PADDRIGHT", "ACTIONBUTTON9")
+
+    SetBinding("PADLSHOULDER", "CLICK ConsolePortUtilityToggle:Ping")
+    SetBinding("PADLTRIGGER", "CLICK ConsolePortPager:2")
+    SetBinding("PADLSTICK", "ACTIONBUTTON7")
+end
+
+function addon:SetKeyBindingsMount()
+    local macroId = GetMacroIndexByName("Спешиться")
+    SetBindingMacro("PAD2", macroId)
+
+    SetBinding("PADLSHOULDER", nil)
+    SetBinding("PADLTRIGGER", nil)
+end
