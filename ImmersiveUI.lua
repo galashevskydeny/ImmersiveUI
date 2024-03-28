@@ -55,10 +55,6 @@ function addon:ShowChatCommand()
 
     UIParent_ManageFramePositions()
 
-    if ConsolePortBar then
-        ConsolePortBar:FadeOut(0)
-    end
-
     for i = 1, 50 do
         if _G["ChatFrame" .. i] then
             _G["ChatFrame" .. i]:SetClampedToScreen(true)
@@ -81,10 +77,6 @@ function addon:HideChatCommand()
     ToggleFrameAlpha(VehicleSeatIndicator)
 
     UIParent_ManageFramePositions()
-
-    if ConsolePortBar and ConsolePortBar:GetAlpha() > 0 then
-        ConsolePortBar:FadeIn(0)
-    end
 
     for i = 1, 50 do
         if _G["ChatFrame" .. i] then
