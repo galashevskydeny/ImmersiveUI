@@ -42,6 +42,19 @@ function addon:OnEnable()
             _G["ChatFrame" .. i]:SetClampRectInsets(0, 0, 0, 0)
         end
     end
+    
+    self:ToggleFrameAlpha(StatusTrackingBarManager)
+    local function onMouseEnter()
+        self:ToggleFrameAlpha(StatusTrackingBarManager)
+    end
+
+    local function onMouseLeave()
+        self:ToggleFrameAlpha(StatusTrackingBarManager)
+    end
+
+    MainStatusTrackingBarContainer:SetScript("OnEnter", onMouseEnter)
+    MainStatusTrackingBarContainer:SetScript("OnLeave", onMouseLeave)
+
 end
 
 function addon:ShowChatCommand()
@@ -53,8 +66,8 @@ function addon:ShowChatCommand()
 
     ChatFrame1:Show()
 
-    ToggleFrameAlpha(ChatFrame1)
-    ToggleFrameAlpha(VehicleSeatIndicator)
+    self:ToggleFrameAlpha(ChatFrame1)
+    self:ToggleFrameAlpha(VehicleSeatIndicator)
 
     ChatFrame1ButtonFrame:Show()
 
@@ -66,6 +79,7 @@ function addon:ShowChatCommand()
             _G["ChatFrame" .. i]:SetClampRectInsets(0, 0, 0, 0)
         end
     end
+    
 end
 
 function addon:HideChatCommand()
@@ -78,8 +92,8 @@ function addon:HideChatCommand()
     ChatFrame1:Hide()
     ChatFrame1ButtonFrame:Hide()
 
-    ToggleFrameAlpha(ChatFrame1)
-    ToggleFrameAlpha(VehicleSeatIndicator)
+    self:ToggleFrameAlpha(ChatFrame1)
+    self:ToggleFrameAlpha(VehicleSeatIndicator)
 
     UIParent_ManageFramePositions()
 
@@ -94,7 +108,7 @@ end
 function addon:ToggleChatCommand()
 
     -- Показать панель полетов на драконе
-    ToggleFrameAlpha(EncounterBar)
+    self:ToggleFrameAlpha(EncounterBar)
 
     if ChatFrame1:GetHeight() <= 2 then
         -- Задержка перед показом чата
@@ -106,7 +120,7 @@ function addon:ToggleChatCommand()
 end
 
 -- Функция для изменения прозрачности фрейма на противоположное
-function ToggleFrameAlpha(frame)
+function addon:ToggleFrameAlpha(frame)
     if not frame or type(frame) ~= "table" or not frame.IsObjectType or not frame:IsObjectType("Frame") then
         print("ToggleFrameAlpha: Неверный фрейм.")
         return
@@ -144,10 +158,13 @@ function addon:SetKeyBindingsDiscovery()
     SetBinding("PADLTRIGGER", "CLICK ConsolePortUtilityToggle:Ping")
     SetBinding("PADLSTICK", nil)
 
-    local macroId = GetMacroIndexByName("Toggle Chat")
-    SetBindingMacro("PADBACK", macroId)
-    SetBindingMacro("PAD6", macroId)
-    
+    local macroChatId = CreateMacro("Toggle Chat", "INV_MISC_QUESTIONMARK", "/ToggleChat", false)
+    SetBindingMacro("PADBACK", macroChatId)
+    SetBindingMacro("PAD6", macroChatId)
+
+    local macroXpId = CreateMacro("Toggle XP", "INV_MISC_QUESTIONMARK", "/run ImmersiveUI:ToggleFrameAlpha(StatusTrackingBarManager)", false)
+    SetBindingMacro("PAD2", macroXpId)
+
 end
 
 function addon:SetKeyBindingsActionBar()
@@ -171,7 +188,7 @@ function addon:SetKeyBindingsActionBar()
 end
 
 function addon:SetKeyBindingsMount()
-    local macroId = GetMacroIndexByName("Спешиться")
+    local macroId = CreateMacro("Спешиться", "INV_MISC_QUESTIONMARK", "/dismount [noflying]", false)
     SetBindingMacro("PAD2", macroId)
 
     SetBinding("PADLSHOULDER", nil)
