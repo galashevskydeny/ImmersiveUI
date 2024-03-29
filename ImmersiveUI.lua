@@ -1,9 +1,6 @@
 local AceAddon = LibStub("AceAddon-3.0")
 local addon = AceAddon:NewAddon("ImmersiveUI", "AceConsole-3.0", "AceEvent-3.0")
 
-local AceConfig = LibStub("AceConfig-3.0")
-local AceConfigDialog = LibStub("AceConfigDialog-3.0")
-
 function addon:OnInitialize()
     -- Регистрация команды ShowChat
     self:RegisterChatCommand("ShowChat", "ShowChatCommand")
@@ -138,59 +135,3 @@ end
 
 -- Глобальная ссылка на аддон
 _G["ImmersiveUI"] = addon
-
-function addon:SetKeyBindingsDiscovery()
-    SetBinding("PAD1", "JUMP")
-    SetBinding("PAD2", nil)
-    SetBinding("PAD3", nil)
-    SetBinding("PAD4", nil)
-
-    SetBinding("PADRTRIGGER", "INTERACTTARGET")
-    SetBinding("PADRSHOULDER", "SHAPESHIFTBUTTON1")
-    SetBinding("PADRSTICK", nil)
-
-    SetBinding("PADDUP", nil)
-    SetBinding("PADDDOWN", nil)
-    SetBinding("PADDLEFT", nil)
-    SetBinding("PADDRIGHT", nil)
-
-    SetBinding("PADLSHOULDER", "CLICK ConsolePortUtilityToggle:LeftButton")
-    SetBinding("PADLTRIGGER", "CLICK ConsolePortUtilityToggle:Ping")
-    SetBinding("PADLSTICK", nil)
-
-    local macroChatId = CreateMacro("Toggle Chat", "INV_MISC_QUESTIONMARK", "/ToggleChat", false)
-    SetBindingMacro("PADBACK", macroChatId)
-    SetBindingMacro("PAD6", macroChatId)
-
-    local macroXpId = CreateMacro("Toggle XP", "INV_MISC_QUESTIONMARK", "/run ImmersiveUI:ToggleFrameAlpha(StatusTrackingBarManager)", false)
-    SetBindingMacro("PAD2", macroXpId)
-
-end
-
-function addon:SetKeyBindingsActionBar()
-    SetBinding("PAD1", "JUMP")
-    SetBinding("PAD2", "ACTIONBUTTON3")
-    SetBinding("PAD3", "ACTIONBUTTON1")
-    SetBinding("PAD4", "ACTIONBUTTON2")
-
-    SetBinding("PADRTRIGGER", "ACTIONBUTTON5")
-    SetBinding("PADRSHOULDER", "ACTIONBUTTON4")
-    SetBinding("PADRSTICK", "ACTIONBUTTON6")
-
-    SetBinding("PADDUP", "ACTIONBUTTON8")
-    SetBinding("PADDDOWN", "ACTIONBUTTON10")
-    SetBinding("PADDLEFT", "ACTIONBUTTON11")
-    SetBinding("PADDRIGHT", "ACTIONBUTTON9")
-
-    SetBinding("PADLSHOULDER", "CLICK ConsolePortUtilityToggle:Ping")
-    SetBinding("PADLTRIGGER", "CLICK ConsolePortPager:2")
-    SetBinding("PADLSTICK", "ACTIONBUTTON7")
-end
-
-function addon:SetKeyBindingsMount()
-    local macroId = CreateMacro("Спешиться", "INV_MISC_QUESTIONMARK", "/dismount [noflying]", false)
-    SetBindingMacro("PAD2", macroId)
-
-    SetBinding("PADLSHOULDER", nil)
-    SetBinding("PADLTRIGGER", nil)
-end
