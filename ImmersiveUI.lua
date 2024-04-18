@@ -10,9 +10,10 @@ end
 
 function addon:OnEnable()
 
-    local key = "PADRSHOULDER" -- замените на интересующую вас клавишу
+    local key = "PADRSTICK" -- замените на интересующую вас клавишу
     local action = GetBindingAction(key)
     print("Действие, назначенное на клавишу " .. key .. ": " .. action)
+
 
     ChatFrame1:SetHeight(1)
     ChatFrame1:Hide()
@@ -55,7 +56,7 @@ function addon:OnEnable()
 end
 
 function addon:ShowChatCommand()
-    ChatFrame1:SetHeight(150)
+    ChatFrame1:SetHeight(100)
 
     ChatFrame1:ClearAllPoints() -- Очищаем все текущие точки привязки
     ChatFrame1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 32) -- Устанавливаем новую точку привязки
